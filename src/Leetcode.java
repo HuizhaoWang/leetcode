@@ -25,6 +25,9 @@ public class Leetcode {
         int target = 9;
         int[] index_two = myLeetcode.twoSum(nums,target);
         System.out.print("刷的第一个题目，继续加油！");
+        System.out.print("刷的第一个题目，继续加油！");
+        System.out.print("刷的第一个题目，继续加油！");
+        
     }
 
 }
