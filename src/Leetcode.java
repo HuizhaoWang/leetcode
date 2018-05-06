@@ -24,7 +24,7 @@ public class Leetcode {
         int[] nums = {2, 7, 11, 15};
         int target = 9;
         int[] index_two = myLeetcode.twoSum(nums,target);
-        System.out.println("["+index_two[0]+","+index_two[1]+"]");
+        
     }
 
 }
