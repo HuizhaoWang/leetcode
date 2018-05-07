@@ -1,6 +1,14 @@
 import java.util.HashMap;
 import java.util.Map;
 
+class ListNode{
+    public int val;
+    public ListNode nextNode;
+    public ListNode(int val) {
+        this.val = val;
+    }
+}
+
 public class Leetcode {
 
 
@@ -35,15 +43,54 @@ public class Leetcode {
         return null;
     }
 
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        //先排除两个数有0值的情况
+        if (l1.val==0){
+            return l2;
+        }
+        if (l2.val==0){
+            return l1;
+        }
+
+        int flag = 0;
+        while (l1!=null&&l2!=null){
+            if (l1.val+l2.val+flag>=10){
+                l1.val = l1.val+l2.val+flag-10;
+                l1.nextNode.val +=1;
+            }else {
+                l1.val = l1.val+l2.val+flag;
+            }
+            l1=l1.nextNode;
+            l2=l2.nextNode;
+        }
+
+        if (l1==null){
+            while (flag==1&&l2.val==9){
+                l1.val = 0;
+                l1 = l1.nextNode;
+            }
+            l1 = l2;
+        }
+
+
+
+
+    }
     public static void main(String args[]){
 
         Leetcode myLeetcode = new Leetcode();
 
+
+
+        /*twoSum
         int[] nums = {2, 7, 11, 15};
         int target = 9;
         int[] index_two = myLeetcode.twoSum(nums,target);
         System.out.println("["+index_two[0]+","+index_two[1]+"]!");
-        
+        */
+
+
+
     }
 
 }
