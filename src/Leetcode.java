@@ -1,7 +1,6 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+
 
 class ListNode{
     int val;
@@ -29,7 +28,7 @@ public class Leetcode {
         return index_two;
     }
 
-    public int[] twoSum(int[] nums,int target){
+    public static int[] twoSum(int[] nums,int target){
 
         Map<Integer,Integer> numsMap = new HashMap<>();
         for (int i = 0; i <nums.length ; i++) {
@@ -132,8 +131,6 @@ public class Leetcode {
         ListNode myListNode = myLeetcode.addTwoNumbers(listNode1.next,listNode2.next);
         myLeetcode.printAll(myListNode);
         */
-
-
 
     }
 

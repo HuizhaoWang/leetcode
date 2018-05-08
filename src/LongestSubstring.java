@@ -1,50 +1,69 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Iterator;
+
 
 public class LongestSubstring {
 
-    public int lengthOfLongestSubstring(String s) {
-        char[] myString = s.toCharArray();
-        int length = 0;
-        int start_index = 0;
-        int end_index = 0;
-
-        Map<Character,Integer> mymap = new HashMap<>();
-        for (int i =0;i<myString.length;i++){
-            mymap.put(myString[i],i);
+    public Map<Character,Integer> charArrayToMap(char[] mychars){
+        Map<Character,Integer> map = new HashMap<>();
+        for (int i =0;i<mychars.length;i++){
+            map.put(mychars[i],i);
         }
+        return map;
+    }
 
-        Set myset = new HashSet();
-        for (int i=0;i<myString.length;i++){
-            if (!myset.contains(myString[i])){
-                myset.add(myString[i]);
-                end_index++;
+    public void Traversal(Map<Character,Integer> map){
+        Iterator iter = map.entrySet().iterator();
+        while (iter.hasNext()){
+            Map.Entry<Character,Integer> entry = (Map.Entry<Character,Integer>) iter.next();
+            char key = entry.getKey();
+            int index = entry.getValue();
+            System.out.println(""+key+":"+index);
+        }
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length()==0){
+            return 0;
+        }
+        char[] mychars = s.toCharArray();
+        int length = 1;
+        int start_index = 0;//用于记录当前最长字串起始位置
+        int end_index = 0;//用于记录当前最长字串结束位置
+        int maybe_start = 0;//用于记录可能的起始位置
+        int index = 0;//用于记录重复的位置
+        Map<Character,Integer> map = new HashMap<>();
+        for (int i=0;i<mychars.length;i++){
+            if (!map.containsKey(mychars[i])){
+                map.put(mychars[i],i);
             }else {
-                if (end_index - start_index + 1>length){
-                    length = end_index-start_index+1;
+                index = map.get(mychars[i]);
+                if (i-maybe_start>length){
+                    end_index = i -1;
+                    start_index = maybe_start;
+                    length = i - maybe_start;
                 }
-                for (int j = start_index;j<=mymap.get(myString[i]);j++){
-                    myset.remove(myString[j]);
+                for (int j = maybe_start;j<=index;j++){
+                    map.remove(mychars[j]);
                 }
-                start_index = mymap.get(myString[i])+1;
+                maybe_start = index+1;
+                map.put(mychars[i],i);
             }
         }
-
-        String longestSubstring = "";
-        for (int k =start_index;k<=end_index;k++){
-            longestSubstring = ""+myString[k];
+        for (int i = start_index; i <=end_index ; i++) {
+            System.out.println(mychars[i]+":"+i);
         }
-        System.out.println(longestSubstring);
-
         return length;
     }
 
     public static  void main(String args[]){
-        String mystring = "abcabcbb";
+        String mychars = "abcbcbacdbcad";
+
         LongestSubstring longestSubstring = new LongestSubstring();
-        int length = longestSubstring.lengthOfLongestSubstring(mystring);
+        int length = longestSubstring.lengthOfLongestSubstring(mychars);
         System.out.println(length);
+
+
     }
 }
