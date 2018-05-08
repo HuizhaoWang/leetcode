@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 class ListNode{
     int val;
@@ -106,6 +108,8 @@ public class Leetcode {
         }
         return head;
     }
+
+
     public static void main(String args[]){
 
         Leetcode myLeetcode = new Leetcode();
@@ -120,16 +124,19 @@ public class Leetcode {
 
         //addTwoNumbers
 
+       /*
         int[] num1 = {2,4,3,5};
         int[] num2 = {5,6,4};
-
         ListNode listNode1 = myLeetcode.ArrayToListNode(num1);
         ListNode listNode2 = myLeetcode.ArrayToListNode(num2);
-
         ListNode myListNode = myLeetcode.addTwoNumbers(listNode1.next,listNode2.next);
-
         myLeetcode.printAll(myListNode);
+        */
+
+
 
     }
+
+
 
 }
