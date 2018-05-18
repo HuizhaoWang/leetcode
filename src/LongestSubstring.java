@@ -57,7 +57,7 @@ public class LongestSubstring {
         return length;
     }
 
-    public static  void main(String args[]){
+    public static void main(String args[]){
         String mychars = "abcbcbacdbcad";
 
         LongestSubstring longestSubstring = new LongestSubstring();
