@@ -4,12 +4,11 @@ import java.util.Map;
 public class Longest_Palindromic_Substring {
 
     public String longestPalindrome(String s) {
-        Map<Character,String> mymap = new HashMap<>();
-        mymap = stringToHashMap(s);
+        Map<Character,String> mymap = stringToHashMap(s);
         int s_length = s.length();
         int start=0;
         int end=0;
-        int longest = end - start;
+        int longest = 1;
         for(int i=0;i<s_length;i++){
             if (longest>=(s_length-i)){
                 break;
@@ -19,13 +18,13 @@ public class Longest_Palindromic_Substring {
             String indexs[] = myvalue_indexs.split("-");
             for(int j=indexs.length-1;j>=0;j--){
                 int index = Integer.parseInt(indexs[j]);
-                if (((index-i)>longest)&&checkIfPalindromic(s.substring(i,index+1))){
+                if (((index-i+1)>longest)&&checkIfPalindromic(s.substring(i,index+1))){
                     start = i;
                     end = index;
-                    continue;
+                    longest = end - start + 1;
+                    break;
                 }
             }
-
         }
         return s.substring(start,end+1)+":"+start+","+end;
     }
@@ -50,7 +49,7 @@ public class Longest_Palindromic_Substring {
         for (int i = 0; i <s.length() ; i++) {
             char char_index_i = s.charAt(i);
             if (mymap.containsKey(char_index_i)){
-                String newValue = ""+mymap.get(char_index_i)+"-"+i;
+                String newValue = mymap.get(char_index_i)+"-"+i;
                 mymap.put(char_index_i,newValue);
             }else {
                 mymap.put(char_index_i,""+i);
@@ -59,10 +58,36 @@ public class Longest_Palindromic_Substring {
         return mymap;
     }
 
+    public int start = 0;
+    public int end = 0;
+
+    public String new_longestPalindrome(String s){
+        if(s.length()<2) return s;
+        for(int i=0;i<s.length()-1;i++){
+            getPalindrom(s,i,i);
+            getPalindrom(s,i,i+1);
+        }
+        return s.substring(start,end+1);
+    }
+
+    public void getPalindrom(String s,int low,int high){
+        while (low>=0&&high<s.length()&&s.charAt(low)==s.charAt(high)){
+            low --;
+            high ++;
+        }
+        if (high-low>end-start){
+            end = high;
+            start = low;
+        }
+    }
+
     public static void main(String args[]){
         Longest_Palindromic_Substring mylongest_palindromic_substring = new Longest_Palindromic_Substring();
-        String newString = "ccc";
-        System.out.println(mylongest_palindromic_substring.longestPalindrome(newString));
+        String newString = "aa";
+//        System.out.println(mylongest_palindromic_substring.stringToHashMap(newString));
+//        System.out.println(mylongest_palindromic_substring.longestPalindrome(newString));
+
+        System.out.println(mylongest_palindromic_substring.new_longestPalindrome(newString));
 
     }
 }
